@@ -1,4 +1,4 @@
-package be.shoktan.alliance.tranquille
+package be.shoktan.alliance.tranquille;
 
 import java.util.Arrays;
 
