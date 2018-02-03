@@ -6,7 +6,7 @@
 
     <groupId>be.shoktan</groupId>
     <artifactId>alliance-tranquille</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 	<description>web application hosting the site of the guild Alliance Tranquille from Guild Wars 2</description>
 	
 	<parent>
