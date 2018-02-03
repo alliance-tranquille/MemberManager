@@ -15,6 +15,10 @@
         <version>1.5.10.RELEASE</version>
     </parent>
 
+    <properties>
+        <project.build.finalName>alliance-tranquille</project.build.finalName>
+    </properties>
+
     <dependencies>
         <!--<dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
