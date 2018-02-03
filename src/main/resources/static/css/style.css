@@ -10,7 +10,7 @@ table.arraylist{
     padding: 8px;
 }
 
-.arraylist tr:nth-child(even){background-color: #f2f2f2;}
+.arraylist tr:nth-child(even){background-color: #FFE4B5;}
 
 .arraylist tr:hover {background-color: #ddd;}
 
