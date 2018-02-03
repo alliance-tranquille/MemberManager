@@ -1,0 +1,1 @@
+web: java -jar target/alliance-tranquille-1.0-SNAPSHOT.jar

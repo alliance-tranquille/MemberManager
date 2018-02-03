@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>GW2 - Alliance Tranquille - les membres</title>
+</head>
+<body>
+<h1>Les membres de la guilde</h1>
+<table>
+    <thead>
+        <tr>
+            <th>nom</th>
+            <th>rang</th>
+            <th>date d'arrivée</th>
+        </tr>
+    </thead>
+
+    <tfoot>
+    <tr>
+        <th>nom</th>
+        <th>rang</th>
+        <th>date d'arrivée</th>
+    </tr>
+    </tfoot>
+
+    <tbody>
+    <!--/*@thymesVar id="members" type="java.util.ArrayList"*/-->
+    <tr th:each="member : ${members}">
+        <!--/*@thymesVar id="member" type="be.shoktan.alliance.tranquille.model.Member"*/-->
+        <td th:text="${member.name}">Wilbur</td>
+        <td th:text="${member.rank}">Dieu parmi les hommes</td>
+        <td th:text="${member.joinDate}">ce matin</td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>

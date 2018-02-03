@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>GW2 - Alliance Tranquille - Connexion</title>
+</head>
+<body>
+
+<div th:if="${param.error}">
+    Ce n'est pas bon.
+</div>
+<div th:if="${param.logout}">
+    Vous avez été déconnecté(e).
+</div>
+<form th:action="@{/login}" method="post">
+    <div><label> Nom d'utilisateur : <input type="text" name="username"/> </label></div>
+    <div><label> Mot de passe : <input type="password" name="password"/> </label></div>
+    <div><input type="submit" value="Connexion"/></div>
+</form>
+</body>
+</html>
