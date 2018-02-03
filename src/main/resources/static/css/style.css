@@ -1,0 +1,24 @@
+table.arraylist{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 95%;
+    margin:auto;
+}
+
+.arraylist th, .arraylist td{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.arraylist tr:nth-child(even){background-color: #f2f2f2;}
+
+.arraylist tr:hover {background-color: #ddd;}
+
+.arraylist th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+    font-variant-caps: small-caps;
+}

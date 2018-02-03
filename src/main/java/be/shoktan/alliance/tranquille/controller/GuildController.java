@@ -18,7 +18,7 @@ public class GuildController {
         members.add(new Member("wisthler", "star", "2015-07-22T06:18:35.000Z"));
         members.add(new Member("shoktan", "pouet", "2015-06-17T02:38:27.000Z"));
 
-        model.addAttribute(members);
+        model.addAttribute("members", members);
 
         return "guildMembers";
     }
