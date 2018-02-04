@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class Application {
@@ -14,6 +15,14 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    public static final String API_KEY = System.getenv().get("API_KEY");
+    public static final String GUILD_ID = System.getenv().get("GUILD_ID");
 
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
