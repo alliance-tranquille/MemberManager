@@ -1,8 +1,12 @@
 package be.shoktan.alliance.tranquille.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Member {
     private String name;
     private String rank;
+
+    @JsonProperty("joined")
     private String joinDate;
 
     public Member(String name, String rank, String joinDate) {
