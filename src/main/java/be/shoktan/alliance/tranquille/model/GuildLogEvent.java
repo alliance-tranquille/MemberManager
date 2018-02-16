@@ -209,4 +209,13 @@ public class GuildLogEvent {
         }
         return null;
     }
+
+    public String getDetails(){
+        String result;
+        switch(type){
+            case rank_change: result = String.format("%s -> %s", oldRank, newRank); break;
+            default: result = "";
+        }
+        return result;
+    }
 }

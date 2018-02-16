@@ -13,19 +13,22 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>type</th>
             <th>membre</th>
+            <th>type</th>
             <th>acteur</th>
+            <th>details</th>
             <th>date</th>
+
         </tr>
     </thead>
 
     <tfoot>
     <tr>
         <th>#</th>
-        <th>type</th>
         <th>membre</th>
+        <th>type</th>
         <th>acteur</th>
+        <th>details</th>
         <th>date</th>
     </tr>
     </tfoot>
@@ -35,9 +38,10 @@
     <tr th:each="log : ${logs}">
         <!--/*@thymesVar id="log" type="be.shoktan.alliance.tranquille.model.GuildLogEvent"*/-->
         <td th:text="${log.id}">42</td>
-        <td th:text="${log.type.prettyPrint}">Invitation</td>
         <td th:text="${log.user}">Wilbur</td>
+        <td th:text="${log.type.prettyPrint}">Invitation</td>
         <td th:text="${log.actor}">God</td>
+        <td th:text="${log.details}">quoi?</td>
         <td th:text="${log.time}">ce matin</td>
     </tr>
     </tbody>
