@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import static be.shoktan.alliance.tranquille.Application.GUILD_ID;
 
 @Service
 public class GuildLogEventServiceImpl implements GuildLogEventService {
-    private List<GuildLogEvent> datas;
+    private List<GuildLogEvent> datas = new ArrayList<>();
 
     @Autowired
     private RestTemplate restTemplate;
@@ -32,7 +33,7 @@ public class GuildLogEventServiceImpl implements GuildLogEventService {
 
         ResponseEntity<GuildLogEvent[]> response = restTemplate.getForEntity(request, GuildLogEvent[].class);
         GuildLogEvent[] data = response.getBody();
-        datas = Arrays.asList(data);
+        datas.addAll(Arrays.asList(data));
 
         return datas;
     }
