@@ -22,17 +22,15 @@ public class GuildLogEventServiceImpl implements GuildLogEventService {
 
     @Override
     public List<GuildLogEvent> findAll() {
-        String since = "";
+        String request = String.format("https://api.guildwars2.com/v2/guild/%s/log?access_token=%s%s", GUILD_ID, API_KEY);
         if (datas != null && !datas.isEmpty()) {
             GuildLogEvent data = datas.get(0);
             if(data != null) {
-                since = "&since="+data.getId();
+                request += "&since="+data.getId();
             }
         }
-        ResponseEntity<GuildLogEvent[]> response = restTemplate.getForEntity(
-                String.format("https://api.guildwars2.com/v2/guild/%s/log?access_token=%s%s%s", GUILD_ID, API_KEY, since),
-                GuildLogEvent[].class
-        );
+
+        ResponseEntity<GuildLogEvent[]> response = restTemplate.getForEntity(request, GuildLogEvent[].class);
         GuildLogEvent[] data = response.getBody();
         datas = Arrays.asList(data);
 
