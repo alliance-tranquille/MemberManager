@@ -1,7 +1,6 @@
 package be.shoktan.alliance.tranquille.service.impl;
 
 import be.shoktan.alliance.tranquille.model.GuildLogEvent;
-import be.shoktan.alliance.tranquille.model.Member;
 import be.shoktan.alliance.tranquille.service.GuildLogEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +22,20 @@ public class GuildLogEventServiceImpl implements GuildLogEventService {
 
     @Override
     public List<GuildLogEvent> findAll() {
-        if(datas == null){
-            ResponseEntity<GuildLogEvent[]> response = restTemplate.getForEntity(
-                    String.format("https://api.guildwars2.com/v2/guild/%s/log?access_token=%s", GUILD_ID, API_KEY),
-                    GuildLogEvent[].class
-            );
-            GuildLogEvent[] data = response.getBody();
-            datas = Arrays.asList(data);
+        String since = "";
+        if (datas != null && !datas.isEmpty()) {
+            GuildLogEvent data = datas.get(0);
+            if(data != null) {
+                since = "&since="+data.getId();
+            }
         }
+        ResponseEntity<GuildLogEvent[]> response = restTemplate.getForEntity(
+                String.format("https://api.guildwars2.com/v2/guild/%s/log?access_token=%s%s%s", GUILD_ID, API_KEY, since),
+                GuildLogEvent[].class
+        );
+        GuildLogEvent[] data = response.getBody();
+        datas = Arrays.asList(data);
+
         return datas;
     }
 }

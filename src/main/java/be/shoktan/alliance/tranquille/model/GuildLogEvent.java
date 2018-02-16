@@ -1,6 +1,8 @@
 package be.shoktan.alliance.tranquille.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
 
@@ -8,24 +10,45 @@ public class GuildLogEvent {
     private int id;
 
     //2017-12-31T15:03:59.000Z
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime time;
     private String user;
-    private String type;
+    private GuildLogEventType type;
+
+    @JsonProperty("invited_by")
     private String invitedBy;
+
+    @JsonProperty("kicked_by")
     private String kickedBy;
+
+    @JsonProperty("changed_by")
     private String changedBy;
+
+    @JsonProperty("declined_by")
     private String declinedBy;
+
+    @JsonProperty("old_rank")
     private String oldRank;
+
+    @JsonProperty("new_rank")
     private String newRank;
+
+    @JsonProperty("item_id")
     private String itemId;
+
     private String count;
     private String operation;
     private int coins;
     private String motd;
     private String action;
+
+    @JsonProperty("upgrade_id")
     private String upgradeId;
+
+    @JsonProperty("recipe_id")
     private String recipeId;
+
+
 
     public int getId() {
         return id;
@@ -51,11 +74,11 @@ public class GuildLogEvent {
         this.user = user;
     }
 
-    public String getType() {
+    public GuildLogEventType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(GuildLogEventType type) {
         this.type = type;
     }
 
@@ -163,17 +186,25 @@ public class GuildLogEvent {
         this.recipeId = recipeId;
     }
 
-    public String getActor(){
-        if(this.declinedBy != null){
+    public String getDeclinedBy() {
+        return declinedBy;
+    }
+
+    public void setDeclinedBy(String declinedBy) {
+        this.declinedBy = declinedBy;
+    }
+
+    public String getActor() {
+        if (StringUtils.isNotBlank(this.declinedBy)) {
             return declinedBy;
         }
-        if(this.changedBy != null){
+        if (StringUtils.isNotBlank(this.changedBy)) {
             return changedBy;
         }
-        if(this.invitedBy != null){
+        if (StringUtils.isNotBlank(this.invitedBy)) {
             return this.invitedBy;
         }
-        if(this.kickedBy != null){
+        if (StringUtils.isNotBlank(this.kickedBy)) {
             return this.kickedBy;
         }
         return null;
