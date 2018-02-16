@@ -1,9 +1,14 @@
 package be.shoktan.alliance.tranquille.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
 public class GuildLogEvent {
     private int id;
+
+    //2017-12-31T15:03:59.000Z
+    @JsonFormat(pattern="yyyy-MM-ddThh:mm:ss.SSSZ")
     private LocalDateTime time;
     private String user;
     private String type;
