@@ -8,7 +8,7 @@ public class GuildLogEvent {
     private int id;
 
     //2017-12-31T15:03:59.000Z
-    @JsonFormat(pattern="yyyy-MM-ddThh:mm:ss.SSSZ")
+    @JsonFormat(pattern="yyyy-MM-dd'T'hh:mm:ss.SSSZ")
     private LocalDateTime time;
     private String user;
     private String type;
