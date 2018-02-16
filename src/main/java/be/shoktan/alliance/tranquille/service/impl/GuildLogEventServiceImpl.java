@@ -22,7 +22,7 @@ public class GuildLogEventServiceImpl implements GuildLogEventService {
 
     @Override
     public List<GuildLogEvent> findAll() {
-        String request = String.format("https://api.guildwars2.com/v2/guild/%s/log?access_token=%s%s", GUILD_ID, API_KEY);
+        String request = String.format("https://api.guildwars2.com/v2/guild/%s/log?access_token=%s", GUILD_ID, API_KEY);
         if (datas != null && !datas.isEmpty()) {
             GuildLogEvent data = datas.get(0);
             if(data != null) {
