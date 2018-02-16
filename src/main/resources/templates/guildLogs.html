@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+    <title>GW2 - Alliance Tranquille - journal de bord</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+
+</head>
+<body>
+<h1>Journal de bord de la guilde</h1>
+<table class="arraylist">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>type</th>
+            <th>membre</th>
+            <th>acteur</th>
+            <th>date</th>
+        </tr>
+    </thead>
+
+    <tfoot>
+    <tr>
+        <<th>#</th>
+        <th>type</th>
+        <th>membre</th>
+        <th>acteur</th>
+        <th>date</th>
+    </tr>
+    </tfoot>
+
+    <tbody>
+    <!--/*@thymesVar id="logs" type="java.util.ArrayList"*/-->
+    <tr th:each="log : ${logs}">
+        <!--/*@thymesVar id="log" type="be.shoktan.alliance.tranquille.model.GuildLogEvent"*/-->
+        <td th:text="${log.id}">42</td>
+        <td th:text="${log.type}">Invitation</td>
+        <td th:text="${log.user}">Wilbur</td>
+        <td th:text="${log.actor}">God</td>
+        <td th:text="${log.time}">ce matin</td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>
