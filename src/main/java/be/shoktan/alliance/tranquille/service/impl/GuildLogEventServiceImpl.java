@@ -18,8 +18,12 @@ import static be.shoktan.alliance.tranquille.Application.GUILD_ID;
 public class GuildLogEventServiceImpl implements GuildLogEventService {
     private List<GuildLogEvent> datas = new ArrayList<>();
 
+    private final RestTemplate restTemplate;
+
     @Autowired
-    private RestTemplate restTemplate;
+    public GuildLogEventServiceImpl(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     @Override
     public List<GuildLogEvent> findAll() {
@@ -33,7 +37,7 @@ public class GuildLogEventServiceImpl implements GuildLogEventService {
 
         ResponseEntity<GuildLogEvent[]> response = restTemplate.getForEntity(request, GuildLogEvent[].class);
         GuildLogEvent[] data = response.getBody();
-        datas.addAll(Arrays.asList(data));
+        datas.addAll(0, Arrays.asList(data));
 
         return datas;
     }
