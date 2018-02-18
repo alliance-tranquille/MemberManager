@@ -53,7 +53,7 @@ public class GuildController {
             Comparator<GuildLogEvent> comparator;
             switch (sort.get()) {
                 case id:
-                    comparator = Comparator.comparingInt(GuildLogEvent::getId);
+                    comparator = Comparator.comparingInt(GuildLogEvent::getInGameId);
                     break;
                 case time:
                     comparator = Comparator.comparing(GuildLogEvent::getTime);

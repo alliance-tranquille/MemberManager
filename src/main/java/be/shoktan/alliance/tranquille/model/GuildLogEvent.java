@@ -7,7 +7,11 @@ import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDateTime;
 
 public class GuildLogEvent {
-    private int id;
+    private @Id @GeneratedValue Long id;
+
+
+    @JsonProperty("id")
+    private int inGameId;
 
     //2017-12-31T15:03:59.000Z
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
@@ -50,12 +54,12 @@ public class GuildLogEvent {
 
 
 
-    public int getId() {
-        return id;
+    public int getInGameId() {
+        return inGameId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setInGameId(int inGameId) {
+        this.inGameId = inGameId;
     }
 
     public LocalDateTime getTime() {
@@ -192,6 +196,14 @@ public class GuildLogEvent {
 
     public void setDeclinedBy(String declinedBy) {
         this.declinedBy = declinedBy;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getActor() {

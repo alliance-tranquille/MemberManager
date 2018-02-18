@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface GuildLogEventService {
     List<GuildLogEvent> findAll();
+
+    void reload();
 }

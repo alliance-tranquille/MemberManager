@@ -62,7 +62,7 @@
     <!--/*@thymesVar id="logs" type="java.util.ArrayList"*/-->
     <tr th:each="log : ${logs}">
         <!--/*@thymesVar id="log" type="be.shoktan.alliance.tranquille.model.GuildLogEvent"*/-->
-        <td th:text="${log.id}">42</td>
+        <td th:text="${log.inGameId}">42</td>
         <td><a th:text="${log.user}" th:href="'?user=' + ${log.user}">Wilbur</a></td>
         <td th:text="${log.type.prettyPrint}">Invitation</td>
         <td th:text="${log.actor}">God</td>
