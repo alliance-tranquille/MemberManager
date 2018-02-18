@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.StringUtils;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -53,6 +50,8 @@ public class GuildLogEvent {
     private String count;
     private String operation;
     private int coins;
+
+    @Lob
     private String motd;
     private String action;
 
