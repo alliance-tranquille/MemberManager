@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import java.time.LocalDateTime;
 
+@Entity
 public class GuildLogEvent {
     private @Id
     @GeneratedValue
