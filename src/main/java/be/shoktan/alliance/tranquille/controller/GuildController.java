@@ -59,10 +59,14 @@ public class GuildController {
                 default:
                     comparator = Comparator.comparing(GuildLogEvent::getUser);
             }
+            boolean reverseOrder = false;
             if(reverse.isPresent()) {
-                if(reverse.get()){
-                    datas.sort(comparator.reversed());
-                }
+                reverseOrder = reverse.get();
+            }
+            if(reverseOrder){
+                datas.sort(comparator.reversed());
+            }else{
+                datas.sort(comparator);
             }
         }
 
