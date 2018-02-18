@@ -1,6 +1,7 @@
 package be.shoktan.alliance.tranquille.controller;
 
 import be.shoktan.alliance.tranquille.model.GuildLogEvent;
+import be.shoktan.alliance.tranquille.model.GuildLogEventType;
 import be.shoktan.alliance.tranquille.model.Member;
 import be.shoktan.alliance.tranquille.service.GuildLogEventService;
 import be.shoktan.alliance.tranquille.service.MemberService;
@@ -8,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -32,12 +36,31 @@ public class GuildController {
     }
 
 
-    @RequestMapping("/guild/log")
-    public String logs(Model model) {
+    @RequestMapping(value = "/guild/log", method = RequestMethod.GET)
+    public String logs(Model model, @RequestParam("sort") GuildLogEventSort sort) {
         List<GuildLogEvent> datas = guildLogEventService.findAll();
+        datas.removeIf(
+                e -> !(e.getType() == GuildLogEventType.rank_change
+                        || e.getType() == GuildLogEventType.invite_declined
+                        || e.getType() == GuildLogEventType.invited
+                        || e.getType() == GuildLogEventType.joined
+                        || e.getType() == GuildLogEventType.kick)
+        );
+        Comparator<GuildLogEvent> comparator;
+        switch (sort){
+            case id: comparator = Comparator.comparingInt(GuildLogEvent::getId); break;
+            case date: comparator = Comparator.comparing(GuildLogEvent::getTime); break;
+            case name:
+                default: comparator = Comparator.comparing(GuildLogEvent::getUser);
+        }
+        datas.sort(comparator);
 
         model.addAttribute("logs", datas);
 
         return "guildLogs";
+    }
+
+    public enum GuildLogEventSort{
+        id, name, date
     }
 }
