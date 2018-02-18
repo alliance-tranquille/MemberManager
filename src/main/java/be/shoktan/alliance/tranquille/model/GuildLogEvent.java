@@ -3,11 +3,15 @@ package be.shoktan.alliance.tranquille.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.annotation.Id;
 
+import javax.persistence.GeneratedValue;
 import java.time.LocalDateTime;
 
 public class GuildLogEvent {
-    private @Id @GeneratedValue Long id;
+    private @Id
+    @GeneratedValue
+    Long id;
 
 
     @JsonProperty("id")
