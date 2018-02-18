@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.StringUtils;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,6 +24,8 @@ public class GuildLogEvent {
     //2017-12-31T15:03:59.000Z
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime time;
+
+    @Column(name = "targetUser")
     private String user;
     private GuildLogEventType type;
 
