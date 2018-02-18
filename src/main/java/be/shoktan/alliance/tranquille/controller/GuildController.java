@@ -36,7 +36,7 @@ public class GuildController {
 
 
     @RequestMapping(value = "/guild/log", method = RequestMethod.GET)
-    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort) {
+    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("reverse") Optional<Boolean> reverse) {
         List<GuildLogEvent> datas = guildLogEventService.findAll();
         datas.removeIf(
                 e -> !(e.getType() == GuildLogEventType.rank_change
@@ -59,7 +59,11 @@ public class GuildController {
                 default:
                     comparator = Comparator.comparing(GuildLogEvent::getUser);
             }
-            datas.sort(comparator.reversed());
+            if(reverse.isPresent()) {
+                if(reverse.get()){
+                    datas.sort(comparator.reversed());
+                }
+            }
         }
 
 
