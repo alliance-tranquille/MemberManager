@@ -11,11 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class GuildController {
@@ -37,7 +36,7 @@ public class GuildController {
 
 
     @RequestMapping(value = "/guild/log", method = RequestMethod.GET)
-    public String logs(Model model, @RequestParam("sort") GuildLogEventSort sort) {
+    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort) {
         List<GuildLogEvent> datas = guildLogEventService.findAll();
         datas.removeIf(
                 e -> !(e.getType() == GuildLogEventType.rank_change
@@ -46,21 +45,30 @@ public class GuildController {
                         || e.getType() == GuildLogEventType.joined
                         || e.getType() == GuildLogEventType.kick)
         );
-        Comparator<GuildLogEvent> comparator;
-        switch (sort){
-            case id: comparator = Comparator.comparingInt(GuildLogEvent::getId); break;
-            case date: comparator = Comparator.comparing(GuildLogEvent::getTime); break;
-            case name:
-                default: comparator = Comparator.comparing(GuildLogEvent::getUser);
+
+        if(sort.isPresent()) {
+            Comparator<GuildLogEvent> comparator;
+            switch (sort.get()) {
+                case id:
+                    comparator = Comparator.comparingInt(GuildLogEvent::getId);
+                    break;
+                case time:
+                    comparator = Comparator.comparing(GuildLogEvent::getTime);
+                    break;
+                case name:
+                default:
+                    comparator = Comparator.comparing(GuildLogEvent::getUser);
+            }
+            datas.sort(comparator);
         }
-        datas.sort(comparator);
+
 
         model.addAttribute("logs", datas);
 
         return "guildLogs";
     }
 
-    public enum GuildLogEventSort{
-        id, name, date
+    public enum GuildLogEventSort {
+        id, name, time
     }
 }
