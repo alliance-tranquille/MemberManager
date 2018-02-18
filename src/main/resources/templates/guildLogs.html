@@ -63,7 +63,7 @@
     <tr th:each="log : ${logs}">
         <!--/*@thymesVar id="log" type="be.shoktan.alliance.tranquille.model.GuildLogEvent"*/-->
         <td th:text="${log.id}">42</td>
-        <td th:text="${log.user}">Wilbur</td>
+        <td><a th:text="${log.user}" href="?user=${log.user}">Wilbur</a></td>
         <td th:text="${log.type.prettyPrint}">Invitation</td>
         <td th:text="${log.actor}">God</td>
         <td th:text="${log.details}">quoi?</td>

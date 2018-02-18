@@ -17,6 +17,7 @@ import static be.shoktan.alliance.tranquille.Application.GUILD_ID;
 @Service
 public class GuildLogEventServiceImpl implements GuildLogEventService {
     private List<GuildLogEvent> datas = new ArrayList<>();
+    private int lastId = -1;
 
     private final RestTemplate restTemplate;
 
@@ -28,15 +29,15 @@ public class GuildLogEventServiceImpl implements GuildLogEventService {
     @Override
     public List<GuildLogEvent> findAll() {
         String request = String.format("https://api.guildwars2.com/v2/guild/%s/log?access_token=%s", GUILD_ID, API_KEY);
-        if (datas != null && !datas.isEmpty()) {
-            GuildLogEvent data = datas.get(0);
-            if(data != null) {
-                request += "&since="+data.getId();
-            }
+        if(lastId >0) {
+            request += "&since="+lastId;
         }
 
         ResponseEntity<GuildLogEvent[]> response = restTemplate.getForEntity(request, GuildLogEvent[].class);
         GuildLogEvent[] data = response.getBody();
+        if(data != null && data.length > 0 && data[0] != null){
+            lastId = data[0].getId();
+        }
         datas.addAll(0, Arrays.asList(data));
 
         return datas;

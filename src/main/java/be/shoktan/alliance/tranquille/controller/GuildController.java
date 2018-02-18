@@ -5,6 +5,7 @@ import be.shoktan.alliance.tranquille.model.GuildLogEventType;
 import be.shoktan.alliance.tranquille.model.Member;
 import be.shoktan.alliance.tranquille.service.GuildLogEventService;
 import be.shoktan.alliance.tranquille.service.MemberService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +37,7 @@ public class GuildController {
 
 
     @RequestMapping(value = "/guild/log", method = RequestMethod.GET)
-    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("rev") Optional<Boolean> reverse) {
+    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("rev") Optional<Boolean> reverse, @RequestParam("user") Optional<String> user) {
         List<GuildLogEvent> datas = guildLogEventService.findAll();
         datas.removeIf(
                 e -> !(e.getType() == GuildLogEventType.rank_change
@@ -45,6 +46,8 @@ public class GuildController {
                         || e.getType() == GuildLogEventType.joined
                         || e.getType() == GuildLogEventType.kick)
         );
+
+        user.ifPresent(s -> datas.removeIf(x -> !StringUtils.equalsIgnoreCase(x.getUser(), s)));
 
         if(sort.isPresent()) {
             Comparator<GuildLogEvent> comparator;
