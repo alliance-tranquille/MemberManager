@@ -36,7 +36,7 @@ public class GuildController {
 
 
     @RequestMapping(value = "/guild/log", method = RequestMethod.GET)
-    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("reverse") Optional<Boolean> reverse) {
+    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("rev") Optional<Boolean> reverse) {
         List<GuildLogEvent> datas = guildLogEventService.findAll();
         datas.removeIf(
                 e -> !(e.getType() == GuildLogEventType.rank_change

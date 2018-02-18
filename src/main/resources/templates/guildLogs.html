@@ -4,37 +4,47 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
     <title>GW2 - Alliance Tranquille - journal de bord</title>
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 
 </head>
 <body>
 <h1>Journal de bord de la guilde</h1>
 <table class="arraylist">
     <thead>
-        <tr>
-            <th>
-                #
-                <a href="?sort=id&reverse=false">+</a>
+    <tr>
+        <th>
+            #
+            <span class="sorting">
+                (
+                <a href="?sort=id&rev=false">+</a>
                 /
-                <a href="?sort=id&reverse=true">-</a>
-            </th>
-            <th>
-                membre
-                <a href="?sort=name&reverse=false">+</a>
+                <a href="?sort=id&rev=true">-</a>
+                )
+            </span>
+        </th>
+        <th>
+            membre
+            <span class="sorting">
+                (<a href="?sort=name&rev=false">+</a>
                 /
-                <a href="?sort=name&reverse=true">-</a>
-            </th>
-            <th>type</th>
-            <th>acteur</th>
-            <th>details</th>
-            <th>
-                date
-                <a href="?sort=date&reverse=false">+</a>
+                <a href="?sort=name&rev=true">-</a>
+                )
+            </span>
+        </th>
+        <th>type</th>
+        <th>acteur</th>
+        <th>details</th>
+        <th>
+            date
+            <span class="sorting">
+                (<a href="?sort=date&rev=false">+</a>
                 /
-                <a href="?sort=date&reverse=true">-</a>
-            </th>
+                <a href="?sort=date&rev=true">-</a>
+                )
+            </span>
+        </th>
 
-        </tr>
+    </tr>
     </thead>
 
     <tfoot>
