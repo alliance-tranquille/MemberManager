@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static be.shoktan.alliance.tranquille.Application.API_KEY;
@@ -40,6 +41,6 @@ public class GuildLogEventServiceImpl implements GuildLogEventService {
         }
         datas.addAll(0, Arrays.asList(data));
 
-        return datas;
+        return new ArrayList<>(datas);
     }
 }
