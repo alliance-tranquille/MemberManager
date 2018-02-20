@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+    <title>GW2 - Alliance Tranquille - les utilisateurs</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<h1>Les utilisateurs de la guilde</h1>
+<!--/*@thymesVar id="newUser" type="be.shoktan.alliance.tranquille.model.User"*/-->
+<form method="post" th:action="@{/user/add}" th:object="${newUser}">
+    <table class="arraylist">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>nom</th>
+            <th>compte principal</th>
+            <th>validé</th>
+            <th>action</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+        <tr>
+            <th>#</th>
+            <th>nom</th>
+            <th>compte principal</th>
+            <th>validé</th>
+            <th>action</th>
+        </tr>
+        </tfoot>
+
+        <tbody>
+        <!--/*@thymesVar id="users" type="java.util.ArrayList"*/-->
+        <tr th:each="member : ${users}">
+            <!--/*@thymesVar id="member" type="be.shoktan.alliance.tranquille.model.User"*/-->
+            <td th:text="${member.id}">42</td>
+            <td th:text="${member.name}">Wilbur</td>
+            <td th:text="${member.mainAccount}">wilbur.1234</td>
+            <td><input title="validé?" disabled="disabled" type="checkbox" th:checked="${member.enabled}"/></td>
+            <td><a th:href="/user/${member.id}">voir</a></td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td><input title="nom" type="text" th:field="*{name}"/></td>
+            <td><input title="compte principal" type="text" th:field="*{mainAccount}"/></td>
+            <td><input title="validé?" type="checkbox" th:field="*{enabled}"/></td>
+            <td><input title="ajouter" type="submit" value="ajouter"></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+</body>
+</html>
