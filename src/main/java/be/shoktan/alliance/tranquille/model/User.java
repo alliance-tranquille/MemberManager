@@ -23,9 +23,9 @@ public class User {
 
     private String password;
 
-    private boolean enabled;
+    private boolean enabled = false;
 
-    private boolean admin;
+    private boolean admin = false;
 
     public Long getId() {
         return id;
