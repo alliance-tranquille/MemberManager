@@ -11,13 +11,14 @@ public class GuildLogComment {
 
     @ManyToOne
     @NotNull
+    @JoinColumn
     private GuildLogEvent event;
 
     @Lob
     private String content;
 
-    @Column(name = "author")
     @ManyToOne
+    @JoinColumn(name = "author")
     private User user;
 
     public Long getId() {
