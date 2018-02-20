@@ -22,14 +22,11 @@ public class GuildLogEvent {
 
     //2017-12-31T15:03:59.000Z
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-    @NotNull
     private LocalDateTime time;
 
     @Column(name = "targetUser")
-    @NotNull
     private String user;
 
-    @NotNull
     private GuildLogEventType type;
 
     @JsonProperty("invited_by")
