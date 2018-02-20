@@ -1,5 +1,7 @@
 package be.shoktan.alliance.tranquille.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -15,6 +17,7 @@ public class GuildLogComment {
     private GuildLogEvent event;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String content;
 
     @ManyToOne

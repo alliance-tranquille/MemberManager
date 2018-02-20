@@ -3,6 +3,7 @@ package be.shoktan.alliance.tranquille.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.Type;
 
 
 import javax.persistence.*;
@@ -57,6 +58,7 @@ public class GuildLogEvent {
     private int coins;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String motd;
 
     private String action;
