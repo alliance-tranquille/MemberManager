@@ -49,28 +49,28 @@ public class GuildController {
 
         user.ifPresent(s -> datas.removeIf(x -> !StringUtils.equalsIgnoreCase(x.getUser(), s)));
 
-        if(sort.isPresent()) {
-            Comparator<GuildLogEvent> comparator;
-            switch (sort.get()) {
-                case id:
-                    comparator = Comparator.comparing(GuildLogEvent::getId);
-                    break;
-                case time:
-                    comparator = Comparator.comparing(GuildLogEvent::getTime);
-                    break;
-                case name:
-                default:
-                    comparator = Comparator.comparing(GuildLogEvent::getUser);
-            }
-            boolean reverseOrder = false;
-            if(reverse.isPresent()) {
-                reverseOrder = reverse.get();
-            }
-            if(reverseOrder){
-                datas.sort(comparator.reversed());
-            }else{
-                datas.sort(comparator);
-            }
+        boolean reverseOrder = reverse.orElse(true);
+        GuildLogEventSort sorter = sort.orElse(GuildLogEventSort.time);
+
+
+        Comparator<GuildLogEvent> comparator;
+        switch (sorter) {
+            case id:
+                comparator = Comparator.comparing(GuildLogEvent::getId);
+                break;
+            case time:
+                comparator = Comparator.comparing(GuildLogEvent::getTime);
+                break;
+            case name:
+            default:
+                comparator = Comparator.comparing(GuildLogEvent::getUser);
+        }
+
+
+        if (reverseOrder) {
+            datas.sort(comparator.reversed());
+        } else {
+            datas.sort(comparator);
         }
 
 
