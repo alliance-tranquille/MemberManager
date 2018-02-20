@@ -72,7 +72,7 @@
         <td th:text="${log.time}">ce matin</td>
         <td>
             <ul>
-                <li th:each="comment : ${log.comment}">
+                <li th:each="comment : ${log.comments}">
                     @<span th:text="${comment.author}">moi</span>:<span th:text="${comment.content}">mon commentaire intéressant</span>
                 </li>
             </ul>
