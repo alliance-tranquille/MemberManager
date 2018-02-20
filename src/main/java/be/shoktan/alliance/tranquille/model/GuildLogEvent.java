@@ -6,7 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class GuildLogEvent {
@@ -20,10 +22,14 @@ public class GuildLogEvent {
 
     //2017-12-31T15:03:59.000Z
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    @NotNull
     private LocalDateTime time;
 
     @Column(name = "targetUser")
+    @NotNull
     private String user;
+
+    @NotNull
     private GuildLogEventType type;
 
     @JsonProperty("invited_by")
@@ -48,11 +54,14 @@ public class GuildLogEvent {
     private String itemId;
 
     private String count;
+
     private String operation;
+
     private int coins;
 
     @Lob
     private String motd;
+
     private String action;
 
     @JsonProperty("upgrade_id")
@@ -61,6 +70,8 @@ public class GuildLogEvent {
     @JsonProperty("recipe_id")
     private String recipeId;
 
+    @OneToMany(mappedBy = "entry")
+    private List<GuildLogComment> comments;
 
 
     public int getInGameId() {
@@ -238,5 +249,13 @@ public class GuildLogEvent {
             default: result = "";
         }
         return result;
+    }
+
+    public List<GuildLogComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<GuildLogComment> comments) {
+        this.comments = comments;
     }
 }

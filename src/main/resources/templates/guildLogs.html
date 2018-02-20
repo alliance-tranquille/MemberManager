@@ -43,6 +43,7 @@
                 )
             </span>
         </th>
+        <th>commentaire(s)</th>
 
     </tr>
     </thead>
@@ -55,6 +56,7 @@
         <th>acteur</th>
         <th>details</th>
         <th>date</th>
+        <th>commentaire(s)</th>
     </tr>
     </tfoot>
 
@@ -62,12 +64,19 @@
     <!--/*@thymesVar id="logs" type="java.util.ArrayList"*/-->
     <tr th:each="log : ${logs}">
         <!--/*@thymesVar id="log" type="be.shoktan.alliance.tranquille.model.GuildLogEvent"*/-->
-        <td th:text="${log.inGameId}">42</td>
+        <td th:text="${log.id}">42</td>
         <td><a th:text="${log.user}" th:href="'?user=' + ${log.user}">Wilbur</a></td>
         <td th:text="${log.type.prettyPrint}">Invitation</td>
         <td th:text="${log.actor}">God</td>
         <td th:text="${log.details}">quoi?</td>
         <td th:text="${log.time}">ce matin</td>
+        <td>
+            <ul>
+                <li th:each="comment : ${log.comment}">
+                    @<span th:text="${comment.user}">moi</span>:<span th:text="${comment.content}">mon commentaire intéressant</span>
+                </li>
+            </ul>
+        </td>
     </tr>
     </tbody>
 
