@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(indexes = {@Index(columnList = "targetUser")})
 public class GuildLogEvent {
     private @Id
     @GeneratedValue
@@ -24,6 +25,7 @@ public class GuildLogEvent {
     //2017-12-31T15:03:59.000Z
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime time;
+
 
     @Column(name = "targetUser")
     private String user;

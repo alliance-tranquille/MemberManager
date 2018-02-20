@@ -40,15 +40,15 @@
             <td th:text="${member.name}">Wilbur</td>
             <td th:text="${member.mainAccount}">wilbur.1234</td>
             <td><input title="validé?" disabled="disabled" type="checkbox" th:checked="${member.enabled}"/></td>
-            <td><a th:href="/user/${member.id}">voir</a></td>
+            <td><a th:href="@{/user/${member.id}}">voir</a></td>
 
         </tr>
         <tr>
             <td></td>
-            <td><input title="nom" type="text" th:field="*{name}"/></td>
-            <td><input title="compte principal" type="text" th:field="*{mainAccount}"/></td>
-            <td><input title="validé?" type="checkbox" th:field="*{enabled}"/></td>
-            <td><input title="ajouter" type="submit" value="ajouter"></td>
+            <td><input title="nom" type="text" th:field="*{name}"></input></td>
+            <td><input title="compte principal" type="text" th:field="*{mainAccount}"></input></td>
+            <td><input title="validé?" type="checkbox" th:field="*{enabled}"></input></td>
+            <td><input title="ajouter" type="submit" value="ajouter"></input></td>
         </tr>
         </tbody>
     </table>
