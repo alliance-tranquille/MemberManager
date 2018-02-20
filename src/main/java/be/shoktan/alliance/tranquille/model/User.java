@@ -17,8 +17,8 @@ public class User {
 
     private String mainAccount;
 
-    @OneToMany(mappedBy = "user")
-    private List<GuildLogEvent> comments;
+    @OneToMany(mappedBy = "author")
+    private List<GuildLogComment> comments;
 
     public Long getId() {
         return id;
@@ -44,11 +44,11 @@ public class User {
         this.mainAccount = mainAccount;
     }
 
-    public List<GuildLogEvent> getComments() {
+    public List<GuildLogComment> getComments() {
         return comments;
     }
 
-    public void setComments(List<GuildLogEvent> comments) {
+    public void setComments(List<GuildLogComment> comments) {
         this.comments = comments;
     }
 }
