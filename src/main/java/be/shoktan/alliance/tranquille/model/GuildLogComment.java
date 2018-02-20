@@ -18,8 +18,8 @@ public class GuildLogComment {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "author")
-    private User user;
+    @JoinColumn
+    private User author;
 
     public Long getId() {
         return id;
@@ -45,11 +45,11 @@ public class GuildLogComment {
         this.content = content;
     }
 
-    public User getUser() {
-        return user;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

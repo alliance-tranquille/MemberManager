@@ -73,7 +73,7 @@
         <td>
             <ul>
                 <li th:each="comment : ${log.comment}">
-                    @<span th:text="${comment.user}">moi</span>:<span th:text="${comment.content}">mon commentaire intéressant</span>
+                    @<span th:text="${comment.author}">moi</span>:<span th:text="${comment.content}">mon commentaire intéressant</span>
                 </li>
             </ul>
         </td>
