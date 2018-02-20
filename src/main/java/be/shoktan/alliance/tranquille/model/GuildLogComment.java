@@ -16,6 +16,7 @@ public class GuildLogComment {
     @Lob
     private String content;
 
+    @Column(name = "author")
     @ManyToOne
     private User user;
 
