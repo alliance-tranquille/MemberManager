@@ -70,7 +70,7 @@ public class GuildLogEvent {
     @JsonProperty("recipe_id")
     private String recipeId;
 
-    @OneToMany(mappedBy = "entry")
+    @OneToMany(mappedBy = "event")
     private List<GuildLogComment> comments;
 
 
