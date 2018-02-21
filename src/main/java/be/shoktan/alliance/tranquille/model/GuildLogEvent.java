@@ -59,8 +59,7 @@ public class GuildLogEvent {
 
     private int coins;
 
-    @Lob
-    @Type(type = "org.hibernate.type.TextType")
+    @Column(columnDefinition="TEXT")
     private String motd;
 
     private String action;

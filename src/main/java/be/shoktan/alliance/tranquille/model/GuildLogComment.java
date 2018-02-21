@@ -16,8 +16,7 @@ public class GuildLogComment {
     @JoinColumn(name = "event")
     private GuildLogEvent event;
 
-    @Lob
-    @Type(type = "org.hibernate.type.TextType")
+    @Column(columnDefinition="TEXT")
     private String content;
 
     @ManyToOne
