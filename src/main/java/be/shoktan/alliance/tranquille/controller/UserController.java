@@ -41,6 +41,7 @@ public class UserController {
     @RequestMapping(value = "/show/{id}")
     public String show(Model model, @PathVariable Long id){
         User user = repository.findOne(id);
+        model.addAttribute("user", user);
         return "userShow";
     }
 

@@ -55,13 +55,16 @@
 
     <tbody>
     <!--/*@thymesVar id="logs" type="java.util.ArrayList"*/-->
+    <!--/*@thymesVar id="log" type="be.shoktan.alliance.tranquille.model.GuildLogEvent"*/-->
     <tr th:each="log : ${logs}">
-        <!--/*@thymesVar id="log" type="be.shoktan.alliance.tranquille.model.GuildLogEvent"*/-->
         <td th:text="${log.id}">42</td>
         <td><input type="checkbox" th:checked="${log.inGameId > 0}" disabled="disabled" title="information obtenue automatiquement depuis le registre de guilde in-game?"/></td>
         <td><a th:text="${log.user}" th:href="'?user=' + ${log.user}">Wilbur</a></td>
         <td th:text="${log.type.prettyPrint}">Invitation</td>
-        <td th:text="${log.actor}">God</td>
+        <!--td th:text="${log.actor}">God</td-->
+        <td>
+            <span th:if="${log.actor != null}">par <span th:text="${log.actor}">god</span></span>
+        </td>
         <td th:text="${log.details}">quoi?</td>
         <td th:text="${log.time}">ce matin</td>
         <td>

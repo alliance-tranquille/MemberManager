@@ -40,7 +40,7 @@
             <td th:text="${member.name}">Wilbur</td>
             <td th:text="${member.mainAccount}">wilbur.1234</td>
             <td><input title="validé?" disabled="disabled" type="checkbox" th:checked="${member.enabled}"/></td>
-            <td><a th:href="@{/user/${member.id}}">voir</a></td>
+            <td><a th:href="@{/user/{id}(id=member.id)}">voir</a></td>
 
         </tr>
         <tr>
