@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,8 +46,9 @@ public class GuildLogEventServiceImpl implements GuildLogEventService {
         ResponseEntity<GuildLogEvent[]> response = restTemplate.getForEntity(request, GuildLogEvent[].class);
         GuildLogEvent[] data = response.getBody();
 
-        List<GuildLogEvent> entities = Arrays.asList(data);
-        entities.removeIf(x -> x.getType().equals(GuildLogEventType.motd));
+        List<GuildLogEvent> entities = new ArrayList<>();
+        entities.addAll(Arrays.asList(data));
+        entities.removeIf(x -> GuildLogEventType.motd.equals(x.getType()));
         repository.save(entities);
    }
 }
