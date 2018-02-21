@@ -10,7 +10,9 @@ public enum GuildLogEventType {
     joined("a rejoint"),
     upgrade("a lancé une upgrade"),
     treasury("a stocké dans le trésor"),
-    motd("a changé le message du jour");
+    motd("a changé le message du jour"),
+    left("a quitté");
+
 
     private String prettyPrint;
 
