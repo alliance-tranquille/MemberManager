@@ -258,4 +258,9 @@ public class GuildLogEvent {
     public void setComments(List<GuildLogComment> comments) {
         this.comments = comments;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s", getUser(), getType().getPrettyPrint());
+    }
 }

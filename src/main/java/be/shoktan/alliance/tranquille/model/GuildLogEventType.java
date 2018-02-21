@@ -2,15 +2,15 @@ package be.shoktan.alliance.tranquille.model;
 
 public enum GuildLogEventType {
     invite_declined("a refusé(e) l'invitation"),
-    invited("invité(e)"),
+    invited("a été invité(e)"),
     influence("influence"),
     kick("a été expulsé(e)"),
-    stash("stock"),
+    stash("a interragi avec le stock"),
     rank_change("a changé(e) de rang"),
     joined("a rejoint"),
-    upgrade("upgrade"),
+    upgrade("a lancé une upgrade"),
     treasury("a stocké dans le trésor"),
-    motd("message du jour");
+    motd("a changé le message du jour");
 
     private String prettyPrint;
 

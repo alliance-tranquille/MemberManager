@@ -26,3 +26,44 @@ table.arraylist{
 .sorting{
     font-size: small;
 }
+
+.cadre {
+    background-color: #ffffff;
+    border: 2px solid #eeab69;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-image: -moz-linear-gradient(top, #ffffff, #f4f4f4);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f4f4f4));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#f4f4f4);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#f4f4f4)";
+    max-width: 75%;
+    margin: auto;
+}
+
+legend {
+    color: #eeab69;
+}
+
+table.form th{
+    text-align: right;
+}
+
+table.form, t
+
+table.form td.actions{
+    margin:auto;
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 1px;
+    text-decoration: underline;
+}
+
+.cadre table{
+    width: 98%;
+    margin:auto;
+    #border: 1px solid green;
+}

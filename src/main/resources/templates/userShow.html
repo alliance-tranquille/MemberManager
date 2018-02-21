@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>GW2 - Alliance Tranquille - les utilisateurs</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<!--/*@thymesVar id="user" type="be.shoktan.alliance.tranquille.model.User"*/-->
+<h1>Les utilisateurs de la guilde :: <span th:text="${user.name}">Dieu</span></h1>
+<form method="post" th:action="@{/user/${user.id}}" th:object="${user}">
+    <fieldset class="cadre">
+        <legend>Données générales</legend>
+        <table class="form" style="max-width: 25%">
+            <tr>
+                <th><label for="name">nom</label> :</th>
+                <td><input type="text" id="name" th:field="*{name}"></td>
+            </tr>
+            <tr>
+                <th><label for="mainAccount">compte principal</label> :</th>
+                <td><input type="text" id="mainAccount" th:field="*{mainAccount}"></td>
+            </tr>
+            <tr>
+                <th><label for="enabled">validé</label> :</th>
+                <td><input type="checkbox" id="enabled" th:field="*{enabled}"></td>
+            </tr>
+            <tr>
+                <th><label for="password1">nouveau mot de passe</label> :</th>
+                <td><input type="password" id="password1" name="password1"></td>
+            </tr>
+            <tr>
+                <th><label for="password2">confirmer mot de passe</label> :</th>
+                <td><input type="password" id="password2" name="password2"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="actions"><input type="submit" value="mettre à jour" title="mettre à jour"></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+<br/>
+<fieldset class="cadre">
+    <legend>Commentaires</legend>
+    <table class="arraylist">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>event</th>
+            <th>commentaire</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>#</th>
+            <th>event</th>
+            <th>commentaire</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        <tr th:each="comment : ${user.comments}">
+            <td th:text="${comment.id}">42</td>
+            <td th:text="${comment.event}">x a rejoint la guilde</td>
+            <td th:text="${comment.content}">voila ce que j'en ai dit</td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+
+</body>
+</html>

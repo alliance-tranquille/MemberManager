@@ -20,6 +20,9 @@ public class User {
     @OneToMany(mappedBy = "author")
     private List<GuildLogComment> comments;
 
+    @Enumerated(EnumType.STRING)
+    private UserRank rank;
+
 
     private String password;
 
@@ -80,6 +83,30 @@ public class User {
     }
 
     public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public UserRank getRank() {
+        return rank;
+    }
+
+    public void setRank(UserRank rank) {
+        this.rank = rank;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
 }

@@ -25,6 +25,11 @@ public class UserController {
         this.encoder = encoder;
     }
 
+    @RequestMapping("")
+    public String home(){
+        return "redirect:/user/";
+    }
+
     @RequestMapping("/")
     public String list(Model model){
         List<User> users = repository.findAll();
@@ -45,6 +50,6 @@ public class UserController {
             user.setPassword(encoder.encode(UUID.randomUUID().toString()));
         }
         repository.save(user);
-        return "redirect:/user";
+        return home();
     }
 }
