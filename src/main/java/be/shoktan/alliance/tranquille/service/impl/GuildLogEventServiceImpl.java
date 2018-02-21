@@ -1,6 +1,7 @@
 package be.shoktan.alliance.tranquille.service.impl;
 
 import be.shoktan.alliance.tranquille.model.GuildLogEvent;
+import be.shoktan.alliance.tranquille.model.GuildLogEventType;
 import be.shoktan.alliance.tranquille.repository.GuildLogEventRepository;
 import be.shoktan.alliance.tranquille.service.GuildLogEventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,8 @@ public class GuildLogEventServiceImpl implements GuildLogEventService {
         ResponseEntity<GuildLogEvent[]> response = restTemplate.getForEntity(request, GuildLogEvent[].class);
         GuildLogEvent[] data = response.getBody();
 
-        repository.save(Arrays.asList(data));
-
+        List<GuildLogEvent> entities = Arrays.asList(data);
+        entities.removeIf(x -> x.getType().equals(GuildLogEventType.motd));
+        repository.save(entities);
    }
 }
