@@ -44,7 +44,8 @@ public class GuildController {
                         || e.getType() == GuildLogEventType.invite_declined
                         || e.getType() == GuildLogEventType.invited
                         || e.getType() == GuildLogEventType.joined
-                        || e.getType() == GuildLogEventType.kick)
+                        || e.getType() == GuildLogEventType.kick
+                        || e.getType() == GuildLogEventType.left)
         );
 
         user.ifPresent(s -> datas.removeIf(x -> !StringUtils.equalsIgnoreCase(x.getUser(), s)));
