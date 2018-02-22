@@ -40,12 +40,11 @@ public class GuildController {
     public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("rev") Optional<Boolean> reverse, @RequestParam("user") Optional<String> user) {
         List<GuildLogEvent> datas = guildLogEventService.findAll();
         datas.removeIf(
-                e -> !(e.getType() == GuildLogEventType.rank_change
-                        || e.getType() == GuildLogEventType.invite_declined
-                        || e.getType() == GuildLogEventType.invited
-                        || e.getType() == GuildLogEventType.joined
-                        || e.getType() == GuildLogEventType.kick
-                        || e.getType() == GuildLogEventType.left)
+                e -> (e.getType() == GuildLogEventType.treasury
+                        || e.getType() == GuildLogEventType.motd
+                        || e.getType() == GuildLogEventType.influence
+                        || e.getType() == GuildLogEventType.stash
+                        || e.getType() == GuildLogEventType.upgrade)
         );
 
         user.ifPresent(s -> datas.removeIf(x -> !StringUtils.equalsIgnoreCase(x.getUser(), s)));

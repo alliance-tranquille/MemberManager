@@ -1,7 +1,9 @@
 package be.shoktan.alliance.tranquille.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Type;
 
@@ -32,17 +34,7 @@ public class GuildLogEvent {
 
     private GuildLogEventType type;
 
-    @JsonProperty("invited_by")
-    private String invitedBy;
-
-    @JsonProperty("kicked_by")
-    private String kickedBy;
-
-    @JsonProperty("changed_by")
-    private String changedBy;
-
-    @JsonProperty("declined_by")
-    private String declinedBy;
+    private String actor;
 
     @JsonProperty("old_rank")
     private String oldRank;
@@ -106,28 +98,34 @@ public class GuildLogEvent {
         this.type = type;
     }
 
+    @JsonGetter("invited_by")
     public String getInvitedBy() {
-        return invitedBy;
+        return actor;
     }
 
+    @JsonSetter( "invited_by")
     public void setInvitedBy(String invitedBy) {
-        this.invitedBy = invitedBy;
+        this.actor = invitedBy;
     }
 
+    @JsonGetter("kicked_by")
     public String getKickedBy() {
-        return kickedBy;
+        return actor;
     }
 
+    @JsonSetter("kicked_by")
     public void setKickedBy(String kickedBy) {
-        this.kickedBy = kickedBy;
+        this.actor = kickedBy;
     }
 
+    @JsonGetter("changed_by")
     public String getChangedBy() {
-        return changedBy;
+        return actor;
     }
 
+    @JsonSetter("changed_by")
     public void setChangedBy(String changedBy) {
-        this.changedBy = changedBy;
+        this.actor = changedBy;
     }
 
     public String getOldRank() {
@@ -210,12 +208,14 @@ public class GuildLogEvent {
         this.recipeId = recipeId;
     }
 
+    @JsonGetter("declined_by")
     public String getDeclinedBy() {
-        return declinedBy;
+        return actor;
     }
 
+    @JsonSetter("declined_by")
     public void setDeclinedBy(String declinedBy) {
-        this.declinedBy = declinedBy;
+        this.actor = declinedBy;
     }
 
     public Long getId() {
@@ -227,26 +227,18 @@ public class GuildLogEvent {
     }
 
     public String getActor() {
-        if (StringUtils.isNotBlank(this.declinedBy)) {
-            return declinedBy;
-        }
-        if (StringUtils.isNotBlank(this.changedBy)) {
-            return changedBy;
-        }
-        if (StringUtils.isNotBlank(this.invitedBy)) {
-            return this.invitedBy;
-        }
-        if (StringUtils.isNotBlank(this.kickedBy)) {
-            return this.kickedBy;
-        }
-        return null;
+        return actor;
+    }
+
+    public void setActor(String actor){
+        this.actor = actor;
     }
 
     public String getDetails(){
         String result;
         switch(type){
             case rank_change: result = String.format("%s -> %s", oldRank, newRank); break;
-            default: result = "";
+            default: result = action;
         }
         return result;
     }

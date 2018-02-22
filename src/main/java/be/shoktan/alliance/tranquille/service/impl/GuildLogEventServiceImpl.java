@@ -10,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static be.shoktan.alliance.tranquille.Application.API_KEY;
@@ -55,6 +52,7 @@ public class GuildLogEventServiceImpl implements GuildLogEventService {
         Stream<GuildLogEvent> stream = entities.stream();
         stream.filter(x -> !GuildLogEventType.motd.equals(x.getType()))
                 .map(this::clean)
+                .sorted(Comparator.comparing(GuildLogEvent::getTime))
                 .forEach(repository::save);
         //repository.save(entities);
     }
