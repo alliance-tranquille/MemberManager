@@ -11,11 +11,3 @@ insert into guild_log_event (id, type, time, target_user, coins, in_game_id, act
 insert into guild_log_event (id, type, time, target_user, coins, in_game_id, action) values (nextval('hibernate_sequence'), 11, '2018-02-22 17:32:01', 'Stray.6312', 0, 0, 'Stray#1012');
 insert into guild_log_event (id, type, time, target_user, coins, in_game_id, action) values (nextval('hibernate_sequence'), 12, '2018-02-21 08:30:01', 'Skinou.4851', 0, 0, 'Magni');
 insert into guild_log_event (id, type, time, target_user, coins, in_game_id, action) values (nextval('hibernate_sequence'), 13, '2018-02-21 08:58:01', 'Skinou.4851', 0, 0, null);
-
-
-
---id |                                                                               content                                                                                | author | event | in_game_id
------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+-------+------------
--- 4 | débutant                                                                                                                                                             |      1 |  1913 |    1083605
--- 5 | fausse manip                                                                                                                                                         |      1 |  1787 |    1083022
--- 6 | post sur le forum "expliquant" le départ : Suite a quelques points que je comprend pas je préfére vous quitter que de me prendre la tête, bonne continuation a vous. |      1 |  1982 |    1083676
