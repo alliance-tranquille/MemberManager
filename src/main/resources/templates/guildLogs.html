@@ -2,82 +2,90 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <title>GW2 - Alliance Tranquille - journal de bord</title>
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 
 </head>
 <body>
-<h1>Journal de bord de la guilde</h1>
-<table class="arraylist">
-    <thead>
-    <tr>
-        <th>#</th>
-        <th><span title="information obtenue automatiquement depuis le registre de guilde in-game?">IG?</span></th>
-        <th>
-            membre
-            <span class="sorting">
+<div th:replace="fragments/header :: header" class="clearfix">
+    <span class="loginInfo">god - <a href="/logout">logoff</a></span>
+    <br/>
+    <hr/>
+</div>
+<div class="container">
+    <h1>Journal de bord de la guilde</h1>
+    <table class="arraylist">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th><span title="information obtenue automatiquement depuis le registre de guilde in-game?">IG?</span></th>
+            <th>
+                membre
+                <span class="sorting">
                 (<a href="?sort=name&amp;rev=false">+</a>
                 /
                 <a href="?sort=name&amp;rev=true">-</a>
                 )
             </span>
-        </th>
-        <th>type</th>
-        <th>acteur</th>
-        <th>details</th>
-        <th>
-            date
-            <span class="sorting">
+            </th>
+            <th>type</th>
+            <th>acteur</th>
+            <th>details</th>
+            <th>
+                date
+                <span class="sorting">
                 (<a href="?sort=time&amp;rev=false">+</a>
                 /
                 <a href="?sort=time&amp;rev=true">-</a>
                 )
             </span>
-        </th>
-        <th>commentaire(s)</th>
+            </th>
+            <th>commentaire(s)</th>
 
-    </tr>
-    </thead>
+        </tr>
+        </thead>
 
-    <tfoot>
-    <tr>
-        <th>#</th>
-        <th><span title="information obtenue automatiquement depuis le registre de guilde in-game?">IG?</span></th>
-        <th>membre</th>
-        <th>type</th>
-        <th>acteur</th>
-        <th>details</th>
-        <th>date</th>
-        <th style="max-width: 25%">commentaire(s)</th>
-    </tr>
-    </tfoot>
+        <tfoot>
+        <tr>
+            <th>#</th>
+            <th><span title="information obtenue automatiquement depuis le registre de guilde in-game?">IG?</span></th>
+            <th>membre</th>
+            <th>type</th>
+            <th>acteur</th>
+            <th>details</th>
+            <th>date</th>
+            <th style="max-width: 25%">commentaire(s)</th>
+        </tr>
+        </tfoot>
 
-    <tbody>
-    <!--/*@thymesVar id="logs" type="java.util.ArrayList"*/-->
-    <!--/*@thymesVar id="log" type="be.shoktan.alliance.tranquille.model.GuildLogEvent"*/-->
-    <tr th:each="log : ${logs}">
-        <td th:text="${log.id}">42</td>
-        <td><input type="checkbox" th:checked="${log.inGameId > 0}" disabled="disabled" title="information obtenue automatiquement depuis le registre de guilde in-game?"/></td>
-        <td><a th:text="${log.user}" th:href="'?user=' + ${log.user}">Wilbur</a></td>
-        <td th:text="${log.type.prettyPrint}">Invitation</td>
-        <!--td th:text="${log.actor}">God</td-->
-        <td>
-            <span th:if="${log.actor != null}">par <span th:text="${log.actor}">god</span></span>
-        </td>
-        <td th:text="${log.details}">quoi?</td>
-        <td th:text="${log.time}">ce matin</td>
-        <td>
-            <ul>
-                <li th:each="comment : ${log.comments}">
-                    @<span th:text="${comment.author.name}">moi</span>:<span th:text="${comment.content}">mon commentaire intéressant</span>
-                </li>
-            </ul>
-        </td>
-    </tr>
-    </tbody>
+        <tbody>
+        <!--/*@thymesVar id="logs" type="java.util.ArrayList"*/-->
+        <!--/*@thymesVar id="log" type="be.shoktan.alliance.tranquille.model.GuildLogEvent"*/-->
+        <tr th:each="log : ${logs}">
+            <td th:text="${log.id}">42</td>
+            <td><input type="checkbox" th:checked="${log.inGameId > 0}" disabled="disabled"
+                       title="information obtenue automatiquement depuis le registre de guilde in-game?"/></td>
+            <td><a th:text="${log.user}" th:href="'?user=' + ${log.user}">Wilbur</a></td>
+            <td th:text="${log.type.prettyPrint}">Invitation</td>
+            <!--td th:text="${log.actor}">God</td-->
+            <td>
+                <span th:if="${log.actor != null}">par <span th:text="${log.actor}">god</span></span>
+            </td>
+            <td th:text="${log.details}">quoi?</td>
+            <td th:text="${log.time}">ce matin</td>
+            <td>
+                <ul>
+                    <li th:each="comment : ${log.comments}">
+                        @<span th:text="${comment.author.name}">moi</span>:<span th:text="${comment.content}">mon commentaire intéressant</span>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
 
-</table>
+    </table>
+</div>
 
 </body>
 </html>

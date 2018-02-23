@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>GW2 - Alliance Tranquille - fragment</title>
+    <link href="../../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<div th:fragment="header">
+    <div class="clearfix">
+        <div class="loginInfo" sec:authorize="isAuthenticated()">
+            <!--img alt="logo"/-->
+            <span sec:authentication="name">dieu</span>
+            <!--a href="/logout">log out</a-->
+        </div>
+
+        <div class="loginInfo" sec:authorize="!isAuthenticated()">
+            <!--img alt="logo"/-->
+            <a href="/login/discord">log in</a>
+        </div>
+
+
+    </div>
+</div>
+</body>
