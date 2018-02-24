@@ -50,4 +50,8 @@ public class User {
                 ", avatar='" + avatar + '\'' +
                 '}';
     }
+
+    public String getAccountName(){
+        return String.format("%s.%s", username, discriminator);
+    }
 }

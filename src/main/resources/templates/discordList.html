@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>GW2 - Alliance Tranquille - les membres discord</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header" class="clearfix">
+    <span class="loginInfo">god - <a href="/logout">logoff</a></span>
+    <br/>
+    <hr/>
+</div>
+<div class="container">
+    <h1>Les membres de la guilde sur discord</h1>
+    <table class="arraylist">
+        <thead>
+        <tr>
+            <th>surnom</th>
+            <th>compte</th>
+            <th>rang</th>
+            <th>date</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+        <tr>
+            <th>surnom</th>
+            <th>compte</th>
+            <th>rang</th>
+            <th>date</th>
+        </tr>
+        </tfoot>
+
+        <tbody>
+        <!--/*@thymesVar id="members" type="java.util.ArrayList"*/-->
+        <tr th:each="member : ${members}">
+            <!--/*@thymesVar id="member" type="be.shoktan.alliance.tranquille.model.discord.Member"*/-->
+            <td th:text="${member.nick}">dieu</td>
+            <td th:text="${member.user.accountName}">dieu</td>
+            <td><span th:each="role : ${member.roles}" th:text="${roles['__${role}__'].name}" th:class="${roles['__${role}__'].name}">GM</span></td>
+            <td th:text="${member.joinedAt}">ce matin</td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+</body>
+</html>
