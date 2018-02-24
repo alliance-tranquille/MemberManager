@@ -15,9 +15,10 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalUnit;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class DiscordServiceImpl implements DiscordService {
@@ -38,7 +39,7 @@ public class DiscordServiceImpl implements DiscordService {
     private List<Member> members;
     private Instant memberRefresh;
 
-    private List<Role> roles;
+    private Map<String, Role> roles;
     private Instant rolesRefresh;
 
     @Autowired
@@ -87,7 +88,9 @@ public class DiscordServiceImpl implements DiscordService {
             LOGGER.info(String.format("retrieved data: %s", members));
             memberRefresh = Instant.now();
         }
-        return members;
+        List<Member> result = new ArrayList<>();
+        result.addAll(members);
+        return result;
     }
 
     private boolean checkCacheTime(Instant reference) {
@@ -105,7 +108,7 @@ public class DiscordServiceImpl implements DiscordService {
     }
 
     @Override
-    public List<Role> getRoles() {
+    public Map<String, Role> getRoles() {
         boolean toCall;
         toCall = checkCacheTime(rolesRefresh);
         if(toCall) {
@@ -113,10 +116,10 @@ public class DiscordServiceImpl implements DiscordService {
             HttpEntity<String> botHeader = getHeaders(false, botToken);
             LOGGER.info(String.format("going to call %s with token <%s> (header: %s)", request, botToken, botHeader.getHeaders().get("Authorization")));
             ResponseEntity<Role[]> response = restTemplate.exchange(request, HttpMethod.GET, botHeader, Role[].class);
-            roles = Arrays.asList(response.getBody());
+            roles = Arrays.stream(response.getBody()).collect(Collectors.toMap(x -> x.getId().toString(), x -> x));
             LOGGER.info(String.format("retrieved data: %s", roles));
             rolesRefresh = Instant.now();
         }
-        return roles;
+        return new HashMap<>(roles);
     }
 }

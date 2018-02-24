@@ -75,3 +75,12 @@ h1{
 .clearfix{
     overflow: auto;
 }
+
+.mini{
+    max-width:25px;
+}
+
+.role{
+    padding: 5px;
+}
+

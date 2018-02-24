@@ -117,4 +117,8 @@ public class Role {
                 ", mentionable=" + mentionable +
                 '}';
     }
+
+    public String getHexColor(){
+        return Integer.toHexString(color);
+    }
 }

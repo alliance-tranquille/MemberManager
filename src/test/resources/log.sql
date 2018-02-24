@@ -7,6 +7,9 @@ insert into guild_log_comment (id, author, content, event) select nextval('hiber
 insert into guild_log_comment (id, author, content, event) select nextval('hibernate_sequence'), 1, 'post sur le forum "expliquant" le départ : Suite a quelques points que je comprend pas je préfére vous quitter que de me prendre la tête, bonne continuation a vous.', id from guild_log_event where in_game_id = 1083676;
 
 
+insert into guild_log_comment (id, author, content, event) select nextval('hibernate_sequence'), 1, 'second compte Axen', id from guild_log_event where in_game_id = 1083605;
+
+
 insert into guild_log_event (id, type, time, target_user, coins, in_game_id, action) values (nextval('hibernate_sequence'), 11, '2018-02-22 09:24:01', 'Skinou.4851', 0, 0, 'Magni#8436');
 insert into guild_log_event (id, type, time, target_user, coins, in_game_id, action) values (nextval('hibernate_sequence'), 11, '2018-02-22 17:32:01', 'Stray.6312', 0, 0, 'Stray#1012');
 insert into guild_log_event (id, type, time, target_user, coins, in_game_id, action) values (nextval('hibernate_sequence'), 12, '2018-02-21 08:30:01', 'Skinou.4851', 0, 0, 'Magni');

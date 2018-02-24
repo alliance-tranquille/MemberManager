@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceS
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
@@ -32,7 +33,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 import javax.servlet.Filter;
-import java.util.Arrays;
 import java.util.Collections;
 
 @Configuration
@@ -43,6 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public WebSecurityConfig(@Qualifier("oauth2ClientContext") OAuth2ClientContext oauth2ClientContext) {
         this.oauth2ClientContext = oauth2ClientContext;
     }
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -82,6 +85,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private Filter ssoFilter() {
         OAuth2ClientAuthenticationProcessingFilter discordFilter = new OAuth2ClientAuthenticationProcessingFilter("/login/discord");
+        discordFilter.setApplicationEventPublisher(publisher);
+
+
+
         OAuth2RestTemplate discordTemplate = new OAuth2RestTemplate(discord(), oauth2ClientContext);
 
         ClientHttpRequestFactory requestFactory = new DiscordHttpRequestFactory();
@@ -118,5 +125,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public SpringSecurityDialect securityDialect(){
         return new SpringSecurityDialect();
     }
+
+
 
 }

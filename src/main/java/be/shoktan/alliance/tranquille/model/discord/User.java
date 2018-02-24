@@ -1,6 +1,7 @@
 package be.shoktan.alliance.tranquille.model.discord;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.apache.commons.lang3.StringUtils;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
@@ -53,5 +54,13 @@ public class User {
 
     public String getAccountName(){
         return String.format("%s.%s", username, discriminator);
+    }
+
+    public String getAvatarUrl(){
+        if(StringUtils.isBlank(avatar)){
+            return "";
+        }else{
+            return String.format("https://cdn.discordapp.com/avatars/%s/%s.png", id, avatar);
+        }
     }
 }

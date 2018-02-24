@@ -59,19 +59,20 @@ public class GuildController {
         return "redirect:/guild/";
     }
 
+    @SuppressWarnings("unchecked")
     @RequestMapping("/discord")
-    public String discordMembers(Model model){
+    public String discordMembers(Model model, Principal principal){
         List<be.shoktan.alliance.tranquille.model.discord.Member> members = discordService.getMembers();
         model.addAttribute("members", members);
 
-        List<Role> roles = discordService.getRoles();
-        Map<String, Role> collect = roles.stream().collect(Collectors.toMap(x -> x.getId().toString(), x -> x));
-        LOGGER.info(String.format("searching %s in map:: %s", "416629300373094410", collect.get("416629300373094410").getName()));
-        model.addAttribute("roles", collect);
+        Map<String, Role> roles = discordService.getRoles();
+        //Map<String, Role> collect = roles.stream().collect(Collectors.toMap(x -> x.getId().toString(), x -> x));
+        model.addAttribute("roles", roles);
         return "discordList";
     }
 
 
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/log", method = RequestMethod.GET)
     public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("rev") Optional<Boolean> reverse, @RequestParam("user") Optional<String> user, Principal principal) {
         /*OAuth2Authentication auth = (OAuth2Authentication) principal;
@@ -81,6 +82,10 @@ public class GuildController {
         OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) auth.getDetails();
         User discord = discordService.getUserDetail(details.getTokenValue());*/
         discordService.getMembers();
+        OAuth2Authentication auth = (OAuth2Authentication) principal;
+        Map<String, Object> details = (Map<String, Object>) auth.getUserAuthentication().getDetails();
+
+        LOGGER.debug("details:: "+details);
 
 
         List<GuildLogEvent> datas = guildLogEventService.findAll();
