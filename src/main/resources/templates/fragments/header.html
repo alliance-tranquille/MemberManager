@@ -9,14 +9,14 @@
 </head>
 <body>
 <div th:fragment="header">
-    <div class="clearfix">
+    <div class="clearfix" id="header">
         <!--/*@thymesVar id="authentication" type="org.springframework.security.oauth2.provider.OAuth2Authentication"*/-->
-        <div class="loginInfo" sec:authorize="isAuthenticated()" th:with="auth = ${#authentication.UserAuthentication}">
+        <div class="loginInfo" sec:authorize="isAuthenticated()" th:with="auth = ${#authentication.UserAuthentication}, role = ${auth.details['mainRole']}" th:style="${'color:#' + role.hexColor}">
             <!--/*@thymesVar id="auth" type="org.springframework.security.core.Authentication"*/-->
             <!--img alt="logo"/-->
             <img th:if="${auth.details['member'] != null}" th:src="${auth.details['member'].user.avatarUrl}"
                  alt="avatar" class="mini" src=""/>
-            <span th:with="role = ${auth.details['mainRole']}" th:style="${'color:#' + role.hexColor}" sec:authentication="name">dieu</span>
+            <span th:text="${#authentication.name + ' - '+ role.name}">dieu - off?</span>
             <!--a href="/logout">log out</a-->
         </div>
 

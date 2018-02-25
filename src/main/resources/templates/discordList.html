@@ -5,7 +5,13 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <title>GW2 - Alliance Tranquille - les membres discord</title>
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
-
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!--Bootstrap JS-->
+    <script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"></script>
 </head>
 <body>
 <div th:replace="fragments/header :: header" class="clearfix">
@@ -22,7 +28,7 @@
             <th>surnom</th>
             <th>compte</th>
             <th>rang</th>
-            <th>date</th>
+            <th>date d'arrivée</th>
         </tr>
         </thead>
 
@@ -32,7 +38,7 @@
             <th>surnom</th>
             <th>compte</th>
             <th>rang</th>
-            <th>date</th>
+            <th>date d'arrivée</th>
         </tr>
         </tfoot>
 
@@ -40,10 +46,19 @@
         <!--/*@thymesVar id="members" type="java.util.ArrayList"*/-->
         <tr th:each="member : ${members}">
             <!--/*@thymesVar id="member" type="be.shoktan.alliance.tranquille.model.discord.Member"*/-->
-            <td><img th:src="${member.user.avatarUrl}" th:title="${'logo '+member.nick}" class="mini"/></td>
-            <td th:text="${member.nick}">dieu</td>
+            <td>
+                <img
+                        th:src="${member.user.avatarUrl}"
+                        th:title="${'logo '+member.displayName}"
+                        class="logo"
+                        src="../static/emeraude.jpg"
+                />
+            </td>
+            <td th:text="${member.displayName}">dieu</td>
             <td th:text="${member.user.accountName}">dieu</td>
-            <td><span th:each="role : ${member.roles}" th:text="${'[' + roles['__${role}__'].name + ']'}" th:class="${'role ' + roles['__${role}__'].name}" th:style="${'color:#' + roles['__${role}__'].hexColor}">GM</span></td>
+            <td><span th:each="role : ${member.roles}" th:text="${'[' + roles['__${role}__'].name + ']'}"
+                      th:class="${'role ' + roles['__${role}__'].name}"
+                      th:style="${'color:#' + roles['__${role}__'].hexColor}">GM</span></td>
             <td th:text="${member.joinedAt}">ce matin</td>
         </tr>
         </tbody>

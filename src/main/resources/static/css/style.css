@@ -80,7 +80,19 @@ h1{
     max-width:25px;
 }
 
+.logo{
+    max-width:50px;
+}
+
+.logo:hover{
+    max-width: 250px;
+}
+
 .role{
+    padding: 5px;
+}
+
+#header{
     padding: 5px;
 }
 

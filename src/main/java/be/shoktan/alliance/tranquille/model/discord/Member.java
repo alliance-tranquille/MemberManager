@@ -3,6 +3,7 @@ package be.shoktan.alliance.tranquille.model.discord;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -58,5 +59,9 @@ public class Member {
                 ", roles=" + roles +
                 ", joinedAt=" + joinedAt +
                 '}';
+    }
+
+    public String getDisplayName(){
+        return (StringUtils.isNotBlank(nick))?nick:user.getAccountName();
     }
 }
