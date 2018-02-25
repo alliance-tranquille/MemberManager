@@ -53,15 +53,15 @@ public class AuthenticationSuccessEventListener implements ApplicationListener<A
         Member member = members.stream().filter(x -> StringUtils.equals(x.getUser().getId(), id)).findAny().orElse(null);
         details.put("member", member);
 
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        Collection<Role> authorities = new ArrayList<>();
         Map<String, Role> roles = discordService.getRoles();
         if (member != null) {
             for(String role : member.getRoles()) {
-                authorities.add(new SimpleGrantedAuthority(roles.get(role).getName()));
+                authorities.add(roles.get(role));
             }
         }
 
-        Role mainRole = roles.values().stream().max(Comparator.comparing(Role::getPosition)).orElse(GUEST_ROLE);
+        Role mainRole = authorities.stream().max(Comparator.comparing(Role::getPosition)).orElse(GUEST_ROLE);
         LOGGER.debug("mainRole is "+mainRole);
         details.put("mainRole", mainRole);
 
