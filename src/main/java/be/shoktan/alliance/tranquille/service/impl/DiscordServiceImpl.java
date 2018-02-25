@@ -74,9 +74,14 @@ public class DiscordServiceImpl implements DiscordService {
         return user;
     }
 
-
     @Override
     public List<Member> getMembers() {
+        return getMembers(false);
+    }
+
+
+    @Override
+    public List<Member> getMembers(boolean bot) {
         boolean toCall;
         toCall = checkCacheTime(memberRefresh);
         if(toCall){
@@ -90,6 +95,9 @@ public class DiscordServiceImpl implements DiscordService {
         }
         List<Member> result = new ArrayList<>();
         result.addAll(members);
+        if(!bot){
+            result.removeIf(x -> x.getUser().isBot());
+        }
         return result;
     }
 

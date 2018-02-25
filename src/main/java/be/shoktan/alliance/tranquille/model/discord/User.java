@@ -9,6 +9,7 @@ public class User {
     private String username;
     private String discriminator;
     private String avatar;
+    private boolean bot;
 
     public String getId() {
         return id;
@@ -49,6 +50,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", discriminator='" + discriminator + '\'' +
                 ", avatar='" + avatar + '\'' +
+                ", bot='" + bot + '\'' +
                 '}';
     }
 
@@ -62,5 +64,13 @@ public class User {
         }else{
             return String.format("https://cdn.discordapp.com/avatars/%s/%s.png", id, avatar);
         }
+    }
+
+    public boolean isBot() {
+        return bot;
+    }
+
+    public void setBot(boolean bot) {
+        this.bot = bot;
     }
 }

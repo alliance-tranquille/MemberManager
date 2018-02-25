@@ -12,5 +12,7 @@ public interface DiscordService {
 
     List<Member> getMembers();
 
+    List<Member> getMembers(boolean bot);
+
     Map<String, Role> getRoles();
 }
