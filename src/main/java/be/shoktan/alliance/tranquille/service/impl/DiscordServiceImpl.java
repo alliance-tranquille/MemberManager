@@ -80,7 +80,7 @@ public class DiscordServiceImpl implements DiscordService {
         boolean toCall;
         toCall = checkCacheTime(memberRefresh);
         if(toCall){
-            String request = String.format("%s/guilds/%s/members", baseUrl, guildId);
+            String request = String.format("%s/guilds/%s/members?limit=%d", baseUrl, guildId, 1000);
             HttpEntity<String> botHeader = getHeaders(false, botToken);
             LOGGER.info(String.format("going to call %s with token <%s> (header: %s)", request, botToken, botHeader.getHeaders().get("Authorization")));
             ResponseEntity<Member[]> response = restTemplate.exchange(request, HttpMethod.GET, botHeader, Member[].class);
