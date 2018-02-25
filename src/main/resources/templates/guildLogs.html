@@ -41,7 +41,7 @@
                 )
             </span>
             </th>
-            <th>commentaire(s)</th>
+            <th th:if="${#authentication.UserAuthentication.details['isOff']}">commentaire(s)</th>
 
         </tr>
         </thead>
@@ -55,7 +55,7 @@
             <th>acteur</th>
             <th>details</th>
             <th>date</th>
-            <th style="max-width: 25%">commentaire(s)</th>
+            <th style="max-width: 25%" th:if="${#authentication.UserAuthentication.details['isOff']}">commentaire(s)</th>
         </tr>
         </tfoot>
 
@@ -74,7 +74,7 @@
             </td>
             <td th:text="${log.details}">quoi?</td>
             <td th:text="${log.time}">ce matin</td>
-            <td>
+            <td th:if="${#authentication.UserAuthentication.details['isOff']}">
                 <ul>
                     <li th:each="comment : ${log.comments}">
                         @<span th:text="${comment.author.name}">moi</span>:<span th:text="${comment.content}">mon commentaire intéressant</span>

@@ -53,11 +53,21 @@ public class AuthenticationSuccessEventListener implements ApplicationListener<A
         Member member = members.stream().filter(x -> StringUtils.equals(x.getUser().getId(), id)).findAny().orElse(null);
         details.put("member", member);
 
+        boolean isOff = false;
+
         Collection<Role> authorities = new ArrayList<>();
         Map<String, Role> roles = discordService.getRoles();
         if (member != null) {
             for(String role : member.getRoles()) {
-                authorities.add(roles.get(role));
+                Role roleItem = roles.get(role);
+                authorities.add(roleItem);
+                if(StringUtils.equalsIgnoreCase(roleItem.getName(), "Officier")){
+                    isOff = true;
+                }
+
+                if(StringUtils.equalsIgnoreCase(roleItem.getName(), "Fondateur")){
+                    isOff = true;
+                }
             }
         }
 
@@ -66,6 +76,8 @@ public class AuthenticationSuccessEventListener implements ApplicationListener<A
         details.put("mainRole", mainRole);
 
         details.put("roles", authorities);
+
+        details.put("isOff", isOff);
 
         LOGGER.info("current user is: " + member);
     }
