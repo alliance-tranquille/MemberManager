@@ -65,7 +65,6 @@ h1{
 .cadre table{
     width: 98%;
     margin:auto;
-    #border: 1px solid green;
 }
 
 .loginInfo{
@@ -86,6 +85,19 @@ h1{
 
 .logo:hover{
     max-width: 250px;
+}
+
+.memberSheet .logo:hover, .memberSheet .logo{
+    max-width:250px;
+}
+
+.memberSheet{
+    display: none;
+    float: left;
+}
+
+.shower:hover .memberSheet{
+    display: flex;
 }
 
 .role{
