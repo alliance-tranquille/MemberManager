@@ -13,6 +13,7 @@
     <tr>
         <th>#</th>
         <th>test
+            <!--/*@thymesVar id="sortElement" type="java.lang.String"*/-->
             <span th:fragment="sortHeader(sortElement)" class="sorting">
                 (
                 <a th:href="${'?reverse=false&sort=' + sortElement}" href="?reverse=false&sort=test" th:title="${'tri par ordre croissant - ' + sortElement}" title="tri par ordre croissant - test">+</a>
@@ -21,16 +22,33 @@
                 )
             </span>
         </th>
+        <th>image</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td>1</td>
         <td>test 1</td>
+        <td>
+            <!--/*@thymesVar id="member" type="be.shoktan.alliance.tranquille.model.discord.Member"*/-->
+            <img th:fragment="logo(member)"
+                 th:src="${member.user.avatarUrl}"
+                 th:title="${'logo '+member.displayName}"
+                 class="logo"
+                 src="../../static/emeraude.jpg"
+            />
+        </td>
     </tr>
     <tr>
         <td>2</td>
-        <td>test 2</td>
+        <td>
+            test 2
+            <!--/*@thymesVar id="member" type="be.shoktan.alliance.tranquille.model.discord.Member"*/-->
+            <div th:frament="memberSheet(member)" class="memberSheet" th:id="${'memberSheet_' + member.accountName}">
+                <img class="logo" th:replace="logo($member)" src="../../static/emeraude.jpg"/>
+            </div>
+        </td>
+        <td>...</td>
     </tr>
     </tbody>
 </table>
