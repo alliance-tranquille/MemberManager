@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>GW2 - Alliance Tranquille - fragment</title>
+    <link href="../../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<table class="arraylist">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>test
+            <span th:fragment="sortHeader(sortElement)" class="sorting">
+                (
+                <a th:href="${'?reverse=false&sort=' + sortElement}" href="?reverse=false&sort=test" th:title="${'tri par ordre croissant - ' + sortElement}" title="tri par ordre croissant - test">+</a>
+                /
+                <a th:href="${'?reverse=true&sort=' + sortElement}" href="?reverse=true&sort=test" th:title="${'tri par ordre décroissant - ' + sortElement}" title="tri par ordre décroissant - test">-</a>
+                )
+            </span>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>test 1</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>test 2</td>
+    </tr>
+    </tbody>
+</table>
+</body>

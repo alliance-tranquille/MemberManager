@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -61,8 +58,27 @@ public class GuildController {
 
     @SuppressWarnings("unchecked")
     @RequestMapping("/discord")
-    public String discordMembers(Model model, Principal principal){
+    public String discordMembers(Model model, @RequestParam("sort") Optional<String> sortingElement, @RequestParam("reverse") Optional<boolean> reverseSorting){
+        String sorting = sortingElement.orElse("");
+        boolean reverse = reverseSorting.orElse(false);
+
+        Comparator<be.shoktan.alliance.tranquille.model.discord.Member> comparator;
+        switch (sorting){
+            case "account": comparator = Comparator.comparing(x -> x.getUser().getAccountName()); break;
+            case "joinDate":comparator = Comparator.comparing(be.shoktan.alliance.tranquille.model.discord.Member::getJoinedAt); break;
+            case "surname":
+            default: comparator = Comparator.comparing(be.shoktan.alliance.tranquille.model.discord.Member::getDisplayName);
+        }
+
+        if(reverse){
+            comparator = comparator.reversed();
+        }
+
         List<be.shoktan.alliance.tranquille.model.discord.Member> members = discordService.getMembers();
+        if(comparator != null){
+            members.sort(comparator);
+        }
+
         model.addAttribute("members", members);
 
         Map<String, Role> roles = discordService.getRoles();

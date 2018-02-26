@@ -23,17 +23,17 @@
     <h1>Les membres de la guilde sur discord</h1>
     <table class="arraylist">
         <thead>
-        <tr>
+        <tr th:fragment="arrayhead">
             <th>logo</th>
-            <th>surnom</th>
-            <th>compte</th>
-            <th>rang</th>
-            <th>date d'arrivée</th>
+            <th>surnom <span th:replace="fragments/helper :: sortHeader('surname')">(+/-)</span></th>
+            <th>compte <span th:replace="fragments/helper :: sortHeader('account')">(+/-)</span></th>
+            <th>rang  <span th:replace="fragments/helper :: sortHeader('rank')">(+/-)</span></th>
+            <th>date d'arrivée  <span th:replace="fragments/helper :: sortHeader('joinDate')">(+/-)</span></th>
         </tr>
         </thead>
 
         <tfoot>
-        <tr>
+        <tr th:replace="arrayhead">
             <th>logo</th>
             <th>surnom</th>
             <th>compte</th>
