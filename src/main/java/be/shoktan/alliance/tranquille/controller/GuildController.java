@@ -58,7 +58,7 @@ public class GuildController {
 
     @SuppressWarnings("unchecked")
     @RequestMapping("/discord")
-    public String discordMembers(Model model, @RequestParam("sort") Optional<String> sortingElement, @RequestParam("reverse") Optional<boolean> reverseSorting){
+    public String discordMembers(Model model, @RequestParam("sort") Optional<String> sortingElement, @RequestParam("reverse") Optional<Boolean> reverseSorting){
         String sorting = sortingElement.orElse("");
         boolean reverse = reverseSorting.orElse(false);
 
