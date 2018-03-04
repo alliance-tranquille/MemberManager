@@ -12,6 +12,7 @@ import be.shoktan.alliance.tranquille.service.impl.DiscordServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -90,20 +92,7 @@ public class GuildController {
 
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/log", method = RequestMethod.GET)
-    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("rev") Optional<Boolean> reverse, @RequestParam("user") Optional<String> user, Principal principal) {
-        /*OAuth2Authentication auth = (OAuth2Authentication) principal;
-        LOGGER.info("auth details:: " + auth.getUserAuthentication().getDetails());
-        LOGGER.info("details:: " + auth.getDetails());
-        LOGGER.info("auth details type:: " + auth.getUserAuthentication().getDetails().getClass());
-        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) auth.getDetails();
-        User discord = discordService.getUserDetail(details.getTokenValue());*/
-        discordService.getMembers();
-        OAuth2Authentication auth = (OAuth2Authentication) principal;
-        Map<String, Object> details = (Map<String, Object>) auth.getUserAuthentication().getDetails();
-
-        LOGGER.debug("details:: "+details);
-
-
+    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("rev") Optional<Boolean> reverse, @RequestParam("user") Optional<String> user, @RequestParam("since") @DateTimeFormat(pattern = "dd.MM.yyyy-hh.mm.ss") Optional<LocalDateTime> since) {
         List<GuildLogEvent> datas = guildLogEventService.findAll();
         datas.removeIf(
                 e -> (e.getType() == GuildLogEventType.treasury
@@ -114,6 +103,10 @@ public class GuildController {
         );
 
         user.ifPresent(s -> datas.removeIf(x -> !StringUtils.equalsIgnoreCase(x.getUser(), s)));
+
+        since.ifPresent(
+                s -> datas.removeIf(x -> x.getTime().isBefore(s))
+        );
 
         boolean reverseOrder = reverse.orElse(true);
         GuildLogEventSort sorter = sort.orElse(GuildLogEventSort.time);
