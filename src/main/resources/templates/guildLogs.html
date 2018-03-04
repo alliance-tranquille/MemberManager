@@ -19,6 +19,7 @@
         <thead>
         <tr>
             <th>#</th>
+            <th>id</th>
             <th><span title="information obtenue automatiquement depuis le registre de guilde in-game?">IG?</span></th>
             <th>
                 membre
@@ -49,6 +50,7 @@
         <tfoot>
         <tr>
             <th>#</th>
+            <th>id</th>
             <th><span title="information obtenue automatiquement depuis le registre de guilde in-game?">IG?</span></th>
             <th>membre</th>
             <th>type</th>
@@ -62,7 +64,8 @@
         <tbody>
         <!--/*@thymesVar id="logs" type="java.util.ArrayList"*/-->
         <!--/*@thymesVar id="log" type="be.shoktan.alliance.tranquille.model.GuildLogEvent"*/-->
-        <tr th:each="log : ${logs}">
+        <tr th:each="log,iterationStatus : ${logs}">
+            <td th:text="${iterationStatus.count}">1</td>
             <td th:text="${log.id}">42</td>
             <td><input type="checkbox" th:checked="${log.inGameId > 0}" disabled="disabled"
                        title="information obtenue automatiquement depuis le registre de guilde in-game?"/></td>
