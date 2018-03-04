@@ -92,7 +92,7 @@ public class GuildController {
 
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/log", method = RequestMethod.GET)
-    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("rev") Optional<Boolean> reverse, @RequestParam("user") Optional<String> user, @RequestParam("since") @DateTimeFormat(pattern = "dd.MM.yyyy-hh.mm.ss") Optional<LocalDateTime> since) {
+    public String logs(Model model, @RequestParam("sort") Optional<GuildLogEventSort> sort, @RequestParam("rev") Optional<Boolean> reverse, @RequestParam("user") Optional<String> user, @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") @RequestParam("since") Optional<LocalDateTime> since) {
         List<GuildLogEvent> datas = guildLogEventService.findAll();
         datas.removeIf(
                 e -> (e.getType() == GuildLogEventType.treasury
